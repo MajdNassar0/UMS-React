@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 
 function Users() {
     const [error,setError]=useState(null);
@@ -33,10 +34,10 @@ function Users() {
             <table className="table">
   <thead>
     <tr>
-      <th scope="col">id</th>
+      
       <th scope="col">name</th>
-      <th scope="col">email</th>
       <th scope="col">image</th>
+      <th scope="col">action</th>
     </tr>
   </thead>
  
@@ -44,10 +45,11 @@ function Users() {
     {user.map(user=>
         <tr key={user.id}>
             <td>{user.name}</td>
-            <td>{user.email}</td>
-            <td>{user.name}</td>
             <td>
                 <img src={user.imageUrl} />
+            </td>
+            <td>
+                <Link className='btn btn-outline-primary' to={`/user/${user.id}`}>Details</Link>
             </td>
         </tr>
     )}
@@ -64,4 +66,4 @@ function Users() {
   )
 }
 
-export default Users
+export default Users
