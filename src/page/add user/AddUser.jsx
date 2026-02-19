@@ -1,36 +1,19 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 
 function AddUser() {
 
-    const [user,setUser]=useState({
-        name:'',
-        age:'',
-        email:'',
-        password:''
-
-    });
-    const handleChange=(e)=>{
-        const {name,value}=e.target;
-        setUser({...user,[name]:value});
-
-    }
-    const Adduser =(e)=>{
-        e.preventDefault();
-        console.log(user);
-
-    }
+   const {register ,handleSubmit ,formState:{error}}=useForm();
   return (
     <>
      <div>
         <div className="container">
-      <form onSubmit={Adduser}>
+      <form onSubmit={handleSubmit}>
         <div>
             <div className="form-floating mb-3">
             <input
-              name="name"
-              value={user.name}
+            {...register('name')}
               type="text"
-              onChange={handleChange}
               id="floatingName"
               className="form-control"
               placeholder="user name"
@@ -40,9 +23,7 @@ function AddUser() {
 
             <div className="form-floating mb-3">
             <input
-              name="age"
-              value={user.age}
-              onChange={handleChange}
+            {...register('age')}
               type="text"
               id="floatingAge"
               className="form-control"
@@ -53,9 +34,7 @@ function AddUser() {
 
           <div className="form-floating mb-3">
             <input
-            name="email"
-            value={user.email}
-            onChange={handleChange}
+            {...register('email')}
               type="email"
               className="form-control"
               id="floatingInput"
@@ -65,9 +44,7 @@ function AddUser() {
           </div>
           <div className="form-floating mb-3">
             <input
-            name="password"
-            value={user.password}
-            onChange={handleChange}
+            {...register('passward')}
               type="password"
               className="form-control"
               id="floatingPassword"
