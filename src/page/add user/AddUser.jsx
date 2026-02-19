@@ -1,14 +1,25 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 function AddUser() {
 
    const {register ,handleSubmit ,formState:{error}}=useForm();
+   const addUser=async(values)=>{
+    const formData=new FormData();
+    formData.append('name',values.name);
+    formData.append('age' ,values.age);
+    formData.append('email',values.email);
+    formData.append('image',values.image)
+    const response=await axios.post(`${import.meta.env.VITE_BURL}/users`,formData);
+    console.log(response);
+
+}
   return (
     <>
      <div>
         <div className="container">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(addUser)}>
         <div>
             <div className="form-floating mb-3">
             <input
@@ -51,6 +62,14 @@ function AddUser() {
               placeholder="Password"
             />
             <label htmlFor="floatingPassword">Password</label>
+          </div>
+          <div className="form-floating mb-3">
+            <input
+            {...register('image')}
+              type="file"
+              className="form-control"
+              id="floatingPassword"
+            />
           </div>
           <button className="btn btn-outline-info">Add User</button>
 
